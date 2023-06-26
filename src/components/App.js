@@ -56,8 +56,8 @@ const renderQuotes = ()=>{
     return quote.character.toLowerCase().includes(selectionName.toLowerCase());
   })
   .map((quote, idx)=>{
-  return <li key={idx}>{quote.quote}
-  <p>{quote.character}</p>
+  return <li className='list__quote'key={idx}>{quote.quote}
+  <p className='list__chara'>{quote.character}</p>
   </li>
 })
 }
@@ -65,53 +65,85 @@ const renderQuotes = ()=>{
   return (
     <React.Fragment>
       <main>
+        <form className='form'>
+          <section className='filters'>
+            <div className='logo__container'>
+              <img
+              className='logo'
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Friends_logo.svg/1186px-Friends_logo.svg.png'
+                alt=''
+              />
+            </div>
+            <h1 className='title'>Frases de Friends</h1>
+            <div className='section filter'>
+              <label>
+                Filtrar por frase
+                <input
+                  className='filterQuote'
+                  type='text'
+                  name='filterQuote'
+                  id='filterQuote'
+                  value={filterQuote}
+                  onChange={handleFilterQuote}
+                />
+              </label>
+              <label>
+                Filtrar por personaje
+                <select
+                  className='filterSelect'
+                  name='SelectName'
+                  id='SelectName'
+                  onClick={handleSelection}
+                >
+                  <option value='Todos'>Todos</option>
+                  <option value='Ross'>Ross</option>
+                  <option value='Monica'>Monica</option>
+                  <option value='Joey'>Joey</option>
+                  <option value='Phoebe'>Phoebe</option>
+                  <option value='Chandler'>Chandler</option>
+                  <option value='Rachel'>Rachel</option>
+                </select>
+              </label>
+            </div>
+          </section>
+          <section className='addQuote'>
+            <h2 className='title'>Añadir una nueva frase</h2>
+            <div className='section'>
+              <label>
+                Frase
+                <input
+                  className='selectQuote'
+                  type='text'
+                  name='quote'
+                  id='quote'
+                  value={newQuote.quote}
+                  onChange={handleAddNewQuote}
+                />
+              </label>
+              <div>
+                <label>
+                  Personaje
+                  <input
+                    className='selectCharacter'
+                    type='text'
+                    name='character'
+                    id='character'
+                    value={newQuote.character}
+                    onChange={handleAddNewQuote}
+                  />
+                </label>
+                <input
+                  className='btn__sectionAdd'
+                  type='button'
+                  value='Añadir una nueva frase'
+                  onClick={handleAddNewQuoteBtn}
+                />
+              </div>
+            </div>
+          </section>
+        </form>
         <section>
-          <h1>Frases de Friends</h1>
-          <label>Filtrar por frase</label>
-          <input
-            type='text'
-            name='filterQuote'
-            id='filterQuote'
-            value={filterQuote}
-            onChange={handleFilterQuote}
-          />
-          <label>Filtrar por personaje</label>
-          <select name='SelectName' id='SelectName' onClick={handleSelection}>
-            <option value='Todos'>Todos</option>
-            <option value='Ross'>Ross</option>
-            <option value='Monica'>Monica</option>
-            <option value='Joey'>Joey</option>
-            <option value='Phoebe'>Phoebe</option>
-            <option value='Chandler'>Chandler</option>
-            <option value='Rachel'>Rachel</option>
-          </select>
-        </section>
-        <section>
-          <h2>Añadir una nueva frase</h2>
-          <label>
-            Frase
-            <input
-              type='text'
-              name='quote'
-              id='quote'
-              value={newQuote.quote}
-              onChange={handleAddNewQuote}
-            />
-          </label>
-          <label>
-            Personaje
-            <input
-              type='text'
-              name='character'
-              id='character'
-              value={newQuote.character}
-              onChange={handleAddNewQuote}
-            />
-          </label>
-          <input type='button' value='Añadir una nueva frase' onClick={handleAddNewQuoteBtn}/>
-        </section>
-        <section>
-          <ul>{renderQuotes()}</ul>
+          <ul className='list'>{renderQuotes()}</ul>
         </section>
       </main>
     </React.Fragment>
